@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "462049401835",
+    "project_id": "finalwork-3bb4c",
+    "storage_bucket": "finalwork-3bb4c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462049401835:android:22cf87ef40ad0492e557ae",
+        "android_client_info": {
+          "package_name": "com.joao.finalwork"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmCpxZbVsSAqkKfQY-mFjNhgEYdMmyqec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
