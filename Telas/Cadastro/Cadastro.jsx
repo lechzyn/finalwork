@@ -1,4 +1,4 @@
-import { View,Text,TextInput, Alert } from "react-native";
+import { View,Text,TextInput, Alert, TouchableOpacity } from "react-native";
 import { auth } from '../../firebaseConfig';
 import { getFirestore,collection,addDoc, doc} from 'firebase/firestore'
 import { useState } from 'react';
@@ -50,7 +50,11 @@ export default function Cadastro(props){
                 placeholder="Senha"
                 password={true}
             />
-            
+            <TouchableOpacity style={Estilos.buttonHome} onPress={CriarUsuario}>
+                <Text style={Estilos.buttonText}>Cadastrar</Text>
+            </TouchableOpacity>
+
         </View>
     )
+
 }
