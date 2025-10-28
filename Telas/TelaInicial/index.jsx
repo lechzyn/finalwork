@@ -3,7 +3,7 @@ import  Estilos  from "../../Componentes/Estilos";
 
 export default function TelaInicial(props){
 
-    const CadastrarUsuario = () =>{
+    const Cadastro = () =>{
         props.navigation.navigate('Cadastro');
     }
 
@@ -20,7 +20,7 @@ export default function TelaInicial(props){
                 <Text style={Estilos.buttonText}>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={Estilos.buttonHome} onPress={CadastrarUsuario}>
+            <TouchableOpacity style={Estilos.buttonHome} onPress={Cadastro}>
                 <Text style={Estilos.buttonText}>Cadastro de Usuário</Text>
             </TouchableOpacity>
 
