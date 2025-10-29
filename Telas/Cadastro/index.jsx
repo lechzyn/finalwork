@@ -1,6 +1,5 @@
 import { View,Text, Alert, TouchableOpacity } from "react-native";
 import { auth } from '../../firebaseConfig';
-import { getFirestore,collection,addDoc, doc} from 'firebase/firestore'
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { Estilos } from '../../Componentes/Estilos'
@@ -11,14 +10,6 @@ const db = getFirestore();
 export default function Cadastro(props){
     const [usuario,setUsuario] = useState('');
     const [senha,setSenha] = useState('');
-
-    const addData = async () => {
-        try{
-            await addDoc(collection(db,"Usuario"),{nome: usuario, senha: senha});
-        }catch(e){
-            console.error(e);
-        }
-    }
 
     const CriarUsuario = async () =>{
         try{
@@ -32,6 +23,8 @@ export default function Cadastro(props){
 
     return(
         <View style={Estilos.container}>
+
+            <Text style={Estilos.header}>Cadastro</Text>
 
             <TextoInput
                 label="Insira seu e-mail"
