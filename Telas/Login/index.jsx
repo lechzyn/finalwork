@@ -1,11 +1,11 @@
-import { View,Text } from "react-native";
+import { View,Text,TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Estilos from '../../Componentes/Estilos'
 import TextoInput from "../../Componentes/TextoInput";
 
 export default function Login(props) {
-  const [usuario, setusuario] = useState("");
-  const [senha, setsenha] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [senha, setSenha] = useState("");
 
   const LogginVerificar = async () => {
     try {
@@ -16,8 +16,8 @@ export default function Login(props) {
       );
       console.log("Login bem-sucedido!", userCredential.user);
       Alert.alert("Sucesso", "Login bem-sucedido!");
+      props.navigation.navigate('Entrada');
     } catch (error) {
-      //console.error('Erro ao fazer login:', error.message);
       Alert.alert("Erro", "Usuário e Senha invalidos");
     }
   };

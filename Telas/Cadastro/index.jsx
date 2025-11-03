@@ -2,10 +2,8 @@ import { View,Text, Alert, TouchableOpacity } from "react-native";
 import { auth } from '../../firebaseConfig';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { Estilos } from '../../Componentes/Estilos'
+import Estilos  from '../../Componentes/Estilos'
 import TextoInput from "../../Componentes/TextoInput";
-
-const db = getFirestore();
 
 export default function Cadastro(props){
     const [usuario,setUsuario] = useState('');
@@ -16,6 +14,14 @@ export default function Cadastro(props){
             const userCredential = await createUserWithEmailAndPassword(auth,usuario,senha);
             console.log(userCredential.user.email);
             await sendEmailVerification(userCredential.user);
+
+            Alert.alert(
+                "Cadastro Concluído!",
+                "Um e-mail de verificação foi enviado para " + usuario + ". Por favor, verifique sua caixa de entrada."
+            );
+
+            setUsuario('');
+            setSenha('');
         }catch(error){
             Alert.alert(error.message);
         }
