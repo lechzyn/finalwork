@@ -18,7 +18,6 @@ export default function App() {
         <Stack.Screen name="TelaInicial" component={TelaInicial} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
-        <Stack.Screen name="Entrada" component={Entrada} />
         <Stack.Screen name="Resetar Senha" component={ResetarSenha} />
         <Stack.Screen name="Entrada" component={Entrada} />
         <Stack.Screen name="TotalCarros" component={TotalCarros} />

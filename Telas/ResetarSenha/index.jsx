@@ -10,6 +10,8 @@ export default function ResetarSenha(props) {
 
   const resetarSenhaEmail = async () => {
     await sendPasswordResetEmail(auth, email);
+    Alert.alert("Sucesso", "Email de redefinição de senha enviado!");
+    props.navigation.navigate('Login');
   };
 
   return(

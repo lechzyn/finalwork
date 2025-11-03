@@ -1,5 +1,7 @@
-import { View,Text,TouchableOpacity } from "react-native";
+import { View,Text,TouchableOpacity, Alert } from "react-native";
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebaseConfig';
 import Estilos from '../../Componentes/Estilos'
 import TextoInput from "../../Componentes/TextoInput";
 
@@ -16,9 +18,9 @@ export default function Login(props) {
       );
       console.log("Login bem-sucedido!", userCredential.user);
       Alert.alert("Sucesso", "Login bem-sucedido!");
-      props.navigation.navigate('Entrada');
+      props.navigation.navigate('Home');
     } catch (error) {
-      Alert.alert("Erro", "Usuário e Senha invalidos");
+      Alert.alert("Erro", "Usuário e Senha invalidos" + error.message);
     }
   };
 

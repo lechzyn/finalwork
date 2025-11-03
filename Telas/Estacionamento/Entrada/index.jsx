@@ -2,7 +2,7 @@ import { View, Text, Alert, TouchableOpacity } from "react-native";
 import { firestore } from '../../../firebaseConfig'; 
 import { useState } from 'react';
 import { collection, addDoc, Timestamp } from "firebase/firestore"; 
-import { Estilos } from '../../../Componentes/Estilos';
+import  Estilos  from '../../../Componentes/Estilos';
 import TextoInput from "../../../Componentes/TextoInput";
 
 export default function Entrada(props) {

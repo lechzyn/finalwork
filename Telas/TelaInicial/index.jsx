@@ -1,4 +1,4 @@
-import { View,Text,TextInput,TouchableOpacity,Image } from "react-native";
+import { View,Text,TouchableOpacity} from "react-native";
 import  Estilos  from "../../Componentes/Estilos";
 
 export default function TelaInicial(props){
