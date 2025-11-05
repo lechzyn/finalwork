@@ -1,12 +1,15 @@
 import { View, Text, Alert, TouchableOpacity } from "react-native";
 import { firestore } from '../../../firebaseConfig'; 
 import { useState } from 'react';
-import { collection, addDoc, Timestamp } from "firebase/firestore"; 
+import { collection, addDoc} from "firebase/firestore"; 
 import  Estilos  from '../../../Componentes/Estilos';
 import TextoInput from "../../../Componentes/TextoInput";
 
 export default function Entrada(props) {
     const [placa, setPlaca] = useState('');
+    const [hora, setHora] = useState('');
+    const [data, setData] = useState('');
+
 
     const RegistrarEntrada = async () => {
         if (placa === '') {
@@ -15,11 +18,13 @@ export default function Entrada(props) {
         }
 
         try {
-            const dataHoraAtual = Timestamp.now(); 
-
-            const docRef = await addDoc(collection(firestore, "entradas"), {
+            const docRef = await addDoc(collection(firestore, "carros"), {
                 placa: placa,
-                dataHoraEntrada: dataHoraAtual
+                horaEntrada: hora,
+                dataEntrada: data,
+                horaSaida: null,
+                dataSaida: null,
+                valor: null
             });
 
             console.log("Documento salvo com ID: ", docRef.id);
@@ -43,6 +48,22 @@ export default function Entrada(props) {
                 value={placa}
                 setValue={setPlaca}
                 placeholder="Ex: ABC-1234"
+            />
+
+             <TextoInput
+                label="Insira a data de entrada"
+                estilo={Estilos.input}
+                value={data}
+                setValue={setData}
+                placeholder="Ex: DD/MM/AAAA"
+            />
+
+            <TextoInput
+                label="Insira a hora de entrada"
+                estilo={Estilos.input}
+                value={hora}
+                setValue={setHora}
+                placeholder="Ex: HH"
             />
 
             <TouchableOpacity style={Estilos.buttonHome} onPress={RegistrarEntrada}>
