@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const Estilos = StyleSheet.create({
     header:{
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#154360',
+        marginBottom: 30
     },
     container: {
         flex: 1,

@@ -14,8 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier":"com.joao.finalwork",
-      "googleServicesFile":"GoogleService-info.plist"
+      "bundleIdentifier": "com.joao.finalwork",
+      "googleServicesFile": "GoogleService-info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,8 +23,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package":"com.joao.finalwork",
-      "googleServicesFile":"google-services.json"
+      "package": "com.joao.finalwork",
+      "googleServicesFile": "google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,15 +32,19 @@
     "plugins": [
       "expo-router",
       [
-      "expo-build-properties",
-      {
-        "ios":{
-          "useFrameworks":"static"
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
-      }
+      ]
     ],
-    "@react-native-firebase/app",
-    "@react-native-firebase/auth"
-    ]
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "18966efb-f595-4f8e-a3d8-ca322ddbf5b3"
+      }
+    }
   }
 }

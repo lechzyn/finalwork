@@ -11,6 +11,7 @@ class TextoInput extends Component{
                             value={this.props.value} 
                             onChangeText={this.props.setValue}
                             placeholder={this.props.placeholder}
+                            placeholderTextColor="#999"
                             maxLength={this.props.maxLength}
                             secureTextEntry= {this.props.password}/>
             </>

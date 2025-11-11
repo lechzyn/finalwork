@@ -1,15 +1,16 @@
-import { View, Text, Alert, TouchableOpacity } from "react-native";
+import { View, Text, Alert } from "react-native";
+import { Button } from "react-native-paper";
 import { firestore } from '../../../firebaseConfig'; 
 import { useState } from 'react';
-import { collection, addDoc} from "firebase/firestore"; 
-import  Estilos  from '../../../Componentes/Estilos';
+import { collection, addDoc } from "firebase/firestore"; 
+import Estilos from "../../../Componentes/Estilos";
 import TextoInput from "../../../Componentes/TextoInput";
 
 export default function Entrada(props) {
     const [placa, setPlaca] = useState('');
     const [hora, setHora] = useState('');
     const [data, setData] = useState('');
-
+    const [carregando, setCarregando] = useState(false);
 
     const RegistrarEntrada = async () => {
         if (placa === '') {
@@ -17,29 +18,37 @@ export default function Entrada(props) {
             return;
         }
 
+        setCarregando(true);
+
         try {
             const docRef = await addDoc(collection(firestore, "carros"), {
-                placa: placa,
+                placa: placa.trim().toUpperCase(),
                 horaEntrada: hora,
                 dataEntrada: data,
-                horaSaida: null,
-                dataSaida: null,
-                valor: null
+                horaSaida: "",
+                dataSaida: "",
+                valor: 0
             });
 
-            console.log("Documento salvo com ID: ", docRef.id);
+            console.log("✅ Documento salvo com ID: ", docRef.id);
             Alert.alert("Sucesso", "Entrada registrada!");
-            setPlaca(''); 
+
+            setPlaca('');
+            setHora('');
+            setData('');
+
+            props.navigation.navigate("Home");
 
         } catch (error) {
-            console.error("Erro ao registrar entrada: ", error);
+            console.error("❌ Erro ao registrar entrada: ", error);
             Alert.alert("Erro", "Não foi possível registrar a entrada.");
+        } finally {
+            setCarregando(false);
         }
     }
 
     return (
         <View style={Estilos.container}>
-
             <Text style={Estilos.header}>Registrar Entrada</Text>
 
             <TextoInput
@@ -50,7 +59,7 @@ export default function Entrada(props) {
                 placeholder="Ex: ABC-1234"
             />
 
-             <TextoInput
+            <TextoInput
                 label="Insira a data de entrada"
                 estilo={Estilos.input}
                 value={data}
@@ -66,10 +75,15 @@ export default function Entrada(props) {
                 placeholder="Ex: HH"
             />
 
-            <TouchableOpacity style={Estilos.buttonHome} onPress={RegistrarEntrada}>
-                <Text style={Estilos.buttonText}>Registrar Entrada</Text>
-            </TouchableOpacity>
-
+            <Button 
+                mode="contained" 
+                onPress={RegistrarEntrada}
+                loading={carregando}
+                disabled={carregando}
+                style={{ marginTop: 20, paddingVertical: 6 }}
+            >
+                Registrar Entrada
+            </Button>
         </View>
     )
 }

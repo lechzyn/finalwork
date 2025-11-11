@@ -1,29 +1,35 @@
-import { View, Text, Alert, TouchableOpacity } from "react-native";
+import { View, Text, Alert } from "react-native";
+import { Button } from "react-native-paper";
 import { firestore } from '../../../firebaseConfig'; 
 import { useState } from 'react';
-import { collection, addDoc} from "firebase/firestore"; 
-import  Estilos  from '../../../Componentes/Estilos';
+import { collection, addDoc } from "firebase/firestore"; 
+import Estilos from "../../../Componentes/Estilos";
 import TextoInput from "../../../Componentes/TextoInput";
 
 export default function ValorHora(props) {
-
     const [valorHora, setValorHora] = useState('');
+    const [carregando, setCarregando] = useState(false);
 
-    const DefinirValorHora = async () =>{
+    const DefinirValorHora = async () => {
         if (valorHora === '') {
             Alert.alert("Erro", "Por favor, preencha o valor da hora.");
             return;
         }
+
+        setCarregando(true);
+
         try {
             const docRef = await addDoc(collection(firestore, "valor"), {
-                valorHora: valorHora
+                valorHora: parseFloat(valorHora)
             });
-            console.log("Valor da hora definido com ID: ", docRef.id);
+            console.log("✅ Valor da hora definido com ID: ", docRef.id);
             Alert.alert("Sucesso", "Valor da hora definido!");
             setValorHora(''); 
         } catch (error) {
-            console.error("Erro ao definir valor da hora: ", error);
+            console.error("❌ Erro ao definir valor da hora: ", error);
             Alert.alert("Erro", "Não foi possível definir o valor da hora.");
+        } finally {
+            setCarregando(false);
         }
     }
 
@@ -38,9 +44,15 @@ export default function ValorHora(props) {
                 placeholder="Ex: 5.00"
             />
             
-            <TouchableOpacity style={Estilos.buttonHome} onPress={DefinirValorHora}>
-                <Text style={Estilos.buttonText}>Definir Valor</Text>
-            </TouchableOpacity>
+            <Button 
+                mode="contained" 
+                onPress={DefinirValorHora}
+                loading={carregando}
+                disabled={carregando}
+                style={{ marginTop: 20, paddingVertical: 6 }}
+            >
+                Definir Valor
+            </Button>
         </View>
     )
 }

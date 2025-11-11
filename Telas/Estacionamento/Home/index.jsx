@@ -1,45 +1,76 @@
-import { View,Text,TouchableOpacity} from "react-native";
-import  Estilos  from "../../Componentes/Estilos";
+import { View, Text , StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
+import Estilos from "../../../Componentes/Estilos";
 
 export default function Home(props) {
 
-    const CadastroEntrada = () =>{
+    const CadastroEntrada = () => {
         props.navigation.navigate('Entrada');
     }
 
-    const Saida = () =>{
+    const Saida = () => {
         props.navigation.navigate('Saida');
     }
 
-    const TotalCarros = () =>{
+    const TotalCarros = () => {
         props.navigation.navigate('TotalCarros');
     }
 
-    const ValorHora = () =>{
+    const ValorHora = () => {
         props.navigation.navigate('ValorHora');
     }
 
     return(
         <View style={Estilos.container}>
+            <Text style={Estilos.header}>Menu Estacionamento</Text>
 
-            <Text style={Estilos.header}>Tela inicial</Text>
+            <Button 
+                mode="contained" 
+                onPress={CadastroEntrada}
+                style={styles.button}
+                labelStyle={styles.texto}
+            >
+                 Entrada
+            </Button>
 
-            <TouchableOpacity style={Estilos.buttonHome} onPress={CadastroEntrada}>
-                <Text style={Estilos.buttonText}>Entrada</Text>
-            </TouchableOpacity>
+            <Button 
+                mode="contained" 
+                onPress={Saida}
+                style={styles.button}
+                labelStyle={styles.texto}
+            >
+                 Saída
+            </Button>
 
-            <TouchableOpacity style={Estilos.buttonHome} onPress={Saida}>
-                <Text style={Estilos.buttonText}>Saída</Text>
-            </TouchableOpacity>
+            <Button 
+                mode="contained" 
+                onPress={TotalCarros}
+                style={styles.button}
+                labelStyle={styles.texto}
+            >
+                 Total de Carros
+            </Button>
 
-            <TouchableOpacity style={Estilos.buttonHome} onPress={TotalCarros}>
-                <Text style={Estilos.buttonText}>Total de Carros</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={Estilos.buttonHome} onPress={ValorHora}>
-                <Text style={Estilos.buttonText}>Valor por Hora</Text>
-            </TouchableOpacity>
-
+            <Button 
+                mode="contained" 
+                onPress={ValorHora}
+                style={styles.button}
+                labelStyle={styles.texto}
+            >
+                 Valor por Hora
+            </Button>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    button: {
+        marginBottom: 12, 
+        paddingVertical: 8,
+        justifyContent: 'center',
+        width: "20%"
+    },
+    texto:{
+        fontSize: 20, fontWeight: '600'
+    }
+});
