@@ -27,7 +27,8 @@ export default function Entrada(props) {
                 dataEntrada: data,
                 horaSaida: "",
                 dataSaida: "",
-                valor: 0
+                valor: 0,
+                status: "ativo"
             });
 
             console.log("✅ Documento salvo com ID: ", docRef.id);

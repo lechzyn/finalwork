@@ -1,8 +1,9 @@
 import { View, Text, FlatList, Alert } from "react-native";
 import { Button } from "react-native-paper";
 import { firestore } from '../../../firebaseConfig'; 
-import { useState, useEffect } from 'react';
-import { collection, getDocs } from "firebase/firestore"; 
+import { useState, useCallback } from 'react'; 
+import { collection, getDocs, query, where } from "firebase/firestore"; 
+import { useFocusEffect } from '@react-navigation/native'; 
 import Estilos from "../../../Componentes/Estilos";
 
 export default function TotalCarros(props) {
@@ -11,14 +12,21 @@ export default function TotalCarros(props) {
     const [totalCarros, setTotalCarros] = useState(0);
     const [arrecadacao, setArrecadacao] = useState(0);
 
-    useEffect(() => {
-        BuscarCarros();
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            BuscarCarros();
+        }, [])
+    );
 
     const BuscarCarros = async () => {
         setCarregando(true);
         try {
-            const querySnapshot = await getDocs(collection(firestore, "carros"));
+            const q = query(
+                collection(firestore, "carros"), 
+                where("status", "==", "saido")
+            );
+
+            const querySnapshot = await getDocs(q);
 
             const carrosComValor = [];
             let total = 0;
@@ -99,7 +107,6 @@ export default function TotalCarros(props) {
                         data={carros}
                         renderItem={renderCarro}
                         keyExtractor={item => item.id}
-                        scrollEnabled={false}
                     />
                 </>
             ) : (
